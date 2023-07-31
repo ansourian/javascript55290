@@ -1,0 +1,37 @@
+h1 {
+    color: rgb(255, 236, 173);
+    text-align: center;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 5vw;
+}
+
+h2 {
+    color: white;
+    text-align: center;
+}
+
+body {
+    background-color: black;
+    background-image: url(https://64.media.tumblr.com/820cbdaca85e9cc93f1913d85f684aca/1f7712b7b0daf22e-5a/s500x750/c66da85d0c24f99ee7e073b4ec64b6ae70cd3c92.gif);
+    background-size: 100vw;
+    margin-top: 14vw;
+}
+
+#calcularButton {
+    color: black;
+    background-color: rgb(255, 236, 173);
+    padding: 1vw;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: bold;
+    border-width: 0px;
+    border-radius: 0.5vw;
+    border-color: rgb(128, 128, 128) ;
+    
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0 4vw 0;
+}
