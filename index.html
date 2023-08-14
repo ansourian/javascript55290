@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TP1 Javascript - Jair Ansourian</title>
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TP1 Javascript - Jair Ansourian</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>
-        CALCULADORA DE CUOTAS
-    </h1>  
-    <div class="button">
-        <button id="calcularButton">ABRIR CALCULADORA</button>
-        <script src="calcularPromedioCuotas.js"></script>    
-    </div>
-    <h2>
-        Entrega N1 del proyecto final de Javascript
-    </h2>
-    <h2>
-        Alumno: Jair Ansourian - Comisión: #55290
-    </h2>
-    <script src="js/index.js"></script>
+  <h1>CALCULADORA DE CUOTAS</h1>
+  <form>
+    <label for="valorTotal">VALOR DEL PRODUCTO:</label>
+    <input type="number" id="valorTotal" required>
+    <br>
+    <label for="cantidadCuotas">CANTIDAD DE CUOTAS:</label>
+    <input type="number" id="cantidadCuotas" required>
+    <br>
+    <button id="calcularButton">CALCULAR CUOTAS</button>
+    <button id="recuperarButton">RECUPERAR ÚLTIMO RESULTADO</button>
+  </form>
+  <div id="resultadoDiv"></div>
+  
+  <script src="js/index.js"></script>
 </body>
 </html>

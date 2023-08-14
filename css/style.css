@@ -1,37 +1,75 @@
-h1 {
+body {
+    font-family: 'Josefin Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    background-image: url(https://64.media.tumblr.com/820cbdaca85e9cc93f1913d85f684aca/1f7712b7b0daf22e-5a/s500x750/c66da85d0c24f99ee7e073b4ec64b6ae70cd3c92.gif);
+    background-size: 100vw;
+  }
+  
+  h1 {
     color: rgb(255, 236, 173);
     text-align: center;
     font-family: 'Josefin Sans', sans-serif;
     font-size: 5vw;
-}
-
-h2 {
-    color: white;
-    text-align: center;
-}
-
-body {
-    background-color: black;
-    background-image: url(https://64.media.tumblr.com/820cbdaca85e9cc93f1913d85f684aca/1f7712b7b0daf22e-5a/s500x750/c66da85d0c24f99ee7e073b4ec64b6ae70cd3c92.gif);
-    background-size: 100vw;
-    margin-top: 14vw;
-}
-
-#calcularButton {
-    color: black;
-    background-color: rgb(255, 236, 173);
-    padding: 1vw;
-    font-family: 'Josefin Sans', sans-serif;
-    font-weight: bold;
-    border-width: 0px;
-    border-radius: 0.5vw;
-    border-color: rgb(128, 128, 128) ;
-    
-}
-
-.button {
+  }
+  
+  form {
+    background-color: #00000080;
+    padding: 2vw;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    margin: 0 0 4vw 0;
-}
+    margin: 0;
+  }
+  
+  label {
+    color: white;
+    margin-bottom: 5px;
+    text-align: center;
+  }
+  
+  input {
+    padding: 1vw;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  button {
+    padding: 1vw 2vw;
+    background-color: rgb(255, 236, 173);
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1.2vw;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: rgb(230, 32, 193);
+    color: rgb(255, 255, 255);
+  }
+  
+  #resultadoDiv {
+    margin-top: 5px;
+    text-align: center;
+    color: white;
+    font-size: 2vw;
+  }
+
+  #recuperarButton {
+    margin-top: 1.5vw;
+    text-align: center;
+    color: rgb(255, 255, 255);
+    font-size: 1vw;
+    background-color: rgb(74, 74, 74);
+  }
+  
