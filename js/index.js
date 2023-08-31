@@ -1,16 +1,16 @@
 document.addEventListener('DOMContentLoaded', function() {
-  var calcularButton = document.getElementById('calcularButton');
-  var recuperarButton = document.getElementById('recuperarButton');
-  var resultadoDiv = document.getElementById('resultadoDiv');
+  const calcularButton = document.getElementById('calcularButton');
+  const recuperarButton = document.getElementById('recuperarButton');
+  const resultadoDiv = document.getElementById('resultadoDiv');
 
   calcularButton.addEventListener('click', function(event) {
     event.preventDefault();
 
-    var valorTotalInput = document.getElementById('valorTotal');
-    var cantidadCuotasInput = document.getElementById('cantidadCuotas');
+    const valorTotalInput = document.getElementById('valorTotal');
+    const cantidadCuotasInput = document.getElementById('cantidadCuotas');
 
-    var valorTotal = parseFloat(valorTotalInput.value);
-    var cantidadCuotas = parseInt(cantidadCuotasInput.value);
+    const valorTotal = parseFloat(valorTotalInput.value);
+    const cantidadCuotas = parseInt(cantidadCuotasInput.value);
 
     if (isNaN(valorTotal) || isNaN(cantidadCuotas)) {
       resultadoDiv.innerHTML = "Ingrese valores numéricos válidos.";
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
 
-    var cuotasCalculadas = calcularPromedioCuotas(valorTotal, cantidadCuotas);
+    const cuotasCalculadas = calcularPromedioCuotas(valorTotal, cantidadCuotas);
     guardarDatosEnStorage(cuotasCalculadas);
     mostrarCuotasCalculadas(cuotasCalculadas);
   });
@@ -33,11 +33,11 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   function calcularPromedioCuotas(valorTotal, cantidadCuotas) {
-    var cuotasCalculadas = [];
+    const cuotasCalculadas = [];
 
-    for (var i = 0; i < cantidadCuotas; i++) {
-      var valorCuota = valorTotal / cantidadCuotas;
-      var cuotaCalculada = {
+    for (let i = 0; i < cantidadCuotas; i++) {
+      const valorCuota = valorTotal / cantidadCuotas;
+      const cuotaCalculada = {
         numeroCuota: i + 1,
         valor: valorCuota.toFixed(2),
       };
@@ -48,21 +48,58 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function mostrarCuotasCalculadas(cuotasCalculadas) {
-    var resultado = "Los valores de cada cuota son:<br>";
+    let resultado = "Los valores de cada cuota son:<br>";
     cuotasCalculadas.forEach(function(cuota) {
       resultado += "Cuota " + cuota.numeroCuota + ": " + cuota.valor + "<br>";
     });
     resultadoDiv.innerHTML = resultado;
   }
 
+function mostrarCuotasCalculadas(cuotasCalculadas) {
+  var resultado = "Los valores de cada cuota son:<br>";
+  cuotasCalculadas.forEach(function(cuota) {
+    resultado += "Cuota " + cuota.numeroCuota + ": " + cuota.valor + "<br>";
+  });
+  resultadoDiv.innerHTML = resultado;
+
+  var numerosCuotas = cuotasCalculadas.map(function(cuota) {
+    return cuota.numeroCuota;
+  });
+  var valoresCuotas = cuotasCalculadas.map(function(cuota) {
+    return parseFloat(cuota.valor);
+  });
+
+  var ctx = document.getElementById('graficoCuotas').getContext('2d');
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: numerosCuotas,
+      datasets: [{
+        label: 'Valores de Cuotas',
+        data: valoresCuotas,
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+}
+
   function guardarDatosEnStorage(datos) {
     localStorage.setItem('cuotasCalculadas', JSON.stringify(datos));
   }
 
   function cargarDatosDesdeStorage() {
-    var storedData = localStorage.getItem('cuotasCalculadas');
+    const storedData = localStorage.getItem('cuotasCalculadas');
     if (storedData) {
-      var cuotasCalculadas = JSON.parse(storedData);
+      const cuotasCalculadas = JSON.parse(storedData);
       mostrarCuotasCalculadas(cuotasCalculadas);
     }
   }

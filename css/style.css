@@ -72,4 +72,9 @@ body {
     font-size: 1vw;
     background-color: rgb(74, 74, 74);
   }
-  
+
+  #graficoContainer {
+    width: 50%;
+    height: auto;
+    margin: 10px auto;
+  }  
