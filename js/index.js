@@ -2,6 +2,29 @@ document.addEventListener('DOMContentLoaded', function() {
   const calcularButton = document.getElementById('calcularButton');
   const recuperarButton = document.getElementById('recuperarButton');
   const resultadoDiv = document.getElementById('resultadoDiv');
+  const graficoCanvas = document.getElementById('graficoCuotas');
+  const ctx = graficoCanvas.getContext('2d');
+
+  const myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: [],
+      datasets: [{
+        label: 'Valores de Cuotas',
+        data: [],
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
 
   calcularButton.addEventListener('click', function(event) {
     event.preventDefault();
@@ -53,44 +76,18 @@ document.addEventListener('DOMContentLoaded', function() {
       resultado += "Cuota " + cuota.numeroCuota + ": " + cuota.valor + "<br>";
     });
     resultadoDiv.innerHTML = resultado;
+
+    const numerosCuotas = cuotasCalculadas.map(function(cuota) {
+      return cuota.numeroCuota;
+    });
+    const valoresCuotas = cuotasCalculadas.map(function(cuota) {
+      return parseFloat(cuota.valor);
+    });
+
+    myChart.data.labels = numerosCuotas;
+    myChart.data.datasets[0].data = valoresCuotas;
+    myChart.update();
   }
-
-function mostrarCuotasCalculadas(cuotasCalculadas) {
-  var resultado = "Los valores de cada cuota son:<br>";
-  cuotasCalculadas.forEach(function(cuota) {
-    resultado += "Cuota " + cuota.numeroCuota + ": " + cuota.valor + "<br>";
-  });
-  resultadoDiv.innerHTML = resultado;
-
-  var numerosCuotas = cuotasCalculadas.map(function(cuota) {
-    return cuota.numeroCuota;
-  });
-  var valoresCuotas = cuotasCalculadas.map(function(cuota) {
-    return parseFloat(cuota.valor);
-  });
-
-  var ctx = document.getElementById('graficoCuotas').getContext('2d');
-  var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: numerosCuotas,
-      datasets: [{
-        label: 'Valores de Cuotas',
-        data: valoresCuotas,
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-        borderColor: 'rgba(75, 192, 192, 1)',
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    }
-  });
-}
 
   function guardarDatosEnStorage(datos) {
     localStorage.setItem('cuotasCalculadas', JSON.stringify(datos));
