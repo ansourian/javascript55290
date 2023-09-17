@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
   const calcularButton = document.getElementById('calcularButton');
   const recuperarButton = document.getElementById('recuperarButton');
   const resultadoDiv = document.getElementById('resultadoDiv');
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  calcularButton.addEventListener('click', function(event) {
+  calcularButton.addEventListener('click', async function(event) {
     event.preventDefault();
 
     const valorTotalInput = document.getElementById('valorTotal');
@@ -46,14 +46,29 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     const cuotasCalculadas = calcularPromedioCuotas(valorTotal, cantidadCuotas);
-    guardarDatosEnStorage(cuotasCalculadas);
+    await guardarDatosEnStorage(cuotasCalculadas);
     mostrarCuotasCalculadas(cuotasCalculadas);
   });
 
-  recuperarButton.addEventListener('click', function(event) {
+  recuperarButton.addEventListener('click', async function(event) {
     event.preventDefault();
-    cargarDatosDesdeStorage();
+    const cuotasCalculadas = await cargarDatosDesdeStorage();
+    if (cuotasCalculadas) {
+      mostrarCuotasCalculadas(cuotasCalculadas);
+    }
   });
+
+  async function guardarDatosEnStorage(datos) {
+    await localStorage.setItem('cuotasCalculadas', JSON.stringify(datos));
+  }
+
+  async function cargarDatosDesdeStorage() {
+    const storedData = await localStorage.getItem('cuotasCalculadas');
+    if (storedData) {
+      return JSON.parse(storedData);
+    }
+    return null;
+  }
 
   function calcularPromedioCuotas(valorTotal, cantidadCuotas) {
     const cuotasCalculadas = [];
@@ -88,16 +103,34 @@ document.addEventListener('DOMContentLoaded', function() {
     myChart.data.datasets[0].data = valoresCuotas;
     myChart.update();
   }
+});
 
-  function guardarDatosEnStorage(datos) {
-    localStorage.setItem('cuotasCalculadas', JSON.stringify(datos));
-  }
+let dolarBlueData;
 
-  function cargarDatosDesdeStorage() {
-    const storedData = localStorage.getItem('cuotasCalculadas');
-    if (storedData) {
-      const cuotasCalculadas = JSON.parse(storedData);
-      mostrarCuotasCalculadas(cuotasCalculadas);
-    }
+function obtenerDatosDolarBlue() {
+  fetch("https://dolarapi.com/v1/dolares/blue")
+    .then(response => response.json())
+    .then(data => {
+      dolarBlueData = data;
+    })
+    .catch(error => {
+      console.error("Error al cargar los datos del dólar blue:", error);
+    });
+}
+
+obtenerDatosDolarBlue();
+
+function mostrarValorDolarBlue() {
+  if (dolarBlueData) {
+    const valorDolarBlue = dolarBlueData.compra;
+    const resultadoDiv = document.getElementById('resultadoDiv');
+    resultadoDiv.innerHTML = `Valor del dólar blue: $${valorDolarBlue}`;
+  } else {
+    console.log("Los datos del dólar blue aún no se han cargado.");
   }
+}
+
+const mostrarValorDolarBlueButton = document.getElementById('mostrarValorDolarBlueButton');
+mostrarValorDolarBlueButton.addEventListener('click', () => {
+  mostrarValorDolarBlue();
 });

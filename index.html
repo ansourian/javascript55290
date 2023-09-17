@@ -1,13 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TP Final Javascript - Jair Ansourian</title>
-  <link rel="stylesheet" href="./css/style.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com">
-  <link rel="stylesheet" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
   <h1>CALCULADORA DE CUOTAS</h1>
@@ -19,14 +14,21 @@
     <input type="number" id="cantidadCuotas" required>
     <br>
     <button id="calcularButton">CALCULAR CUOTAS</button>
+    <button id="mostrarValorDolarBlueButton">MOSTRAR VALOR DOLAR BLUE</button>
     <button id="recuperarButton">RECUPERAR ÚLTIMO RESULTADO</button>
+
   </form>
   <div id="resultadoDiv"></div>
   <div id="graficoContainer">
     <canvas id="graficoCuotas" width="100" height="50"></canvas>
   </div>
-  
   <script src="js/index.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+  <script>
+    const mostrarValorDolarBlueButton = document.getElementById('mostrarValorDolarBlueButton');
+    mostrarValorDolarBlueButton.addEventListener('click', () => {
+      mostrarValorDolar();
+    });
+  </script>
 </body>
 </html>
